@@ -15,8 +15,8 @@ import javax.inject.Singleton
 @Singleton
 class AnimeRepositoryImpl @Inject constructor(private val apiService: AnimeApiService) : AnimeRepository{
 
-    override fun fetchAnime(limit : Int , offset : Int) = flow<Either<String, List<Anime>>> {
-        emit(Either.Right(apiService.getAnime(limit , offset).data.map {
+    override fun fetchAnime() = flow<Either<String, List<Anime>>> {
+        emit(Either.Right(apiService.getAnime().data.map {
             it.toDomain()
         }))
     }.flowOn(Dispatchers.IO).catch {

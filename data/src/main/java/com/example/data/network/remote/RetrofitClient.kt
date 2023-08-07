@@ -2,10 +2,12 @@ package com.example.data.network.remote
 
 import com.example.data.network.remote.apiservices.AnimeApiService
 import com.example.data.network.remote.apiservices.MangaApiService
+import com.example.data.network.remote.apiservices.UserApiService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.create
 import java.util.concurrent.TimeUnit
 
 class RetrofitClient {
@@ -30,4 +32,5 @@ class RetrofitClient {
 
     fun provideMangaApiService() = retrofitClient.create(MangaApiService::class.java)
 
+    fun provideUserApiService() = retrofitClient.create(UserApiService::class.java)
 }

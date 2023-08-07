@@ -1,11 +1,11 @@
-package com.example.kitsuapi.presentation.ui.fragments.anime
+package com.example.kitsuapi.presentation.ui.fragments.user
 
 import androidx.lifecycle.viewModelScope
 import com.example.domain.either.Either
-import com.example.domain.usecase.AnimeUseCase
+import com.example.domain.usecase.UserUseCase
 import com.example.kitsuapi.presentation.base.BaseViewModel
-import com.example.kitsuapi.presentation.models.anime.AnimeUI
-import com.example.kitsuapi.presentation.models.anime.toUI
+import com.example.kitsuapi.presentation.models.user.UserUI
+import com.example.kitsuapi.presentation.models.user.toUI
 import com.example.kitsuapi.presentation.ui.state.UIState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -14,22 +14,21 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class AmineViewModel @Inject constructor(
-    private val fetchAnimeUseCase: AnimeUseCase
-) : BaseViewModel() {
+class UserViewModel @Inject constructor(
+    private val fetchUserUseCase: UserUseCase
+): BaseViewModel() {
 
     private val _countriesState =
-        MutableStateFlow<UIState<List<AnimeUI>>>(UIState.Loading())
+        MutableStateFlow<UIState<List<UserUI>>>(UIState.Loading())
     val countriesState = _countriesState.asStateFlow()
 
-
     init {
-        fetchAnimeById()
+        fetchUser()
     }
 
-    private fun fetchAnimeById() {
+    private fun fetchUser() {
         viewModelScope.launch {
-            fetchAnimeUseCase().collect { it ->
+            fetchUserUseCase().collect { it ->
                 when (it) {
                     is Either.Left -> {
                         it.message?.let {
@@ -37,8 +36,8 @@ class AmineViewModel @Inject constructor(
                         }
                     }
                     is Either.Right -> {
-                        it.data?.let {anime ->
-                            _countriesState.value = UIState.Success(anime.map {it.toUI()})
+                        it.data?.let {user ->
+                            _countriesState.value = UIState.Success(user.map { it.toUI() })
                         }
                     }
                 }

@@ -9,5 +9,5 @@ import javax.inject.Inject
 class AnimeUseCase @Inject constructor(
     private val repository: AnimeRepository
 ){
-    operator fun invoke(limit : Int , offset: Int): Flow<Either<String, List<Anime>>> = repository.fetchAnime(limit , offset)
+    operator fun invoke(): Flow<Either<String, List<Anime>>> = repository.fetchAnime()
 }

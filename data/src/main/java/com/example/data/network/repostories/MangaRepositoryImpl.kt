@@ -13,8 +13,8 @@ import javax.inject.Inject
 
 class MangaRepositoryImpl @Inject constructor(private val apiService: MangaApiService): MangaRepository {
 
-    override fun fetchManga(limit: Int, offset: Int) = flow<Either<String, List<Manga>>> {
-        emit(Either.Right(apiService.getManga(limit, offset).data.map {
+    override fun fetchManga() = flow<Either<String, List<Manga>>> {
+        emit(Either.Right(apiService.getManga().data.map {
             it.toDomain()
         }))
     }.flowOn(Dispatchers.IO).catch {

@@ -10,5 +10,5 @@ class MangaUseCase @Inject constructor(
     private val repository: MangaRepository
 ) {
 
-    operator fun invoke(limit: Int , offset : Int): Flow<Either<String, List<Manga>>> = repository.fetchManga(limit , offset)
+    operator fun invoke(): Flow<Either<String, List<Manga>>> = repository.fetchManga()
 }

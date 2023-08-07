@@ -6,6 +6,6 @@ import kotlinx.coroutines.flow.Flow
 
 interface MangaRepository {
 
-    fun fetchManga(limit : Int , offset : Int): Flow<Either<String, List<Manga>>>
+    fun fetchManga(): Flow<Either<String, List<Manga>>>
 
 }

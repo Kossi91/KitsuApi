@@ -1,5 +1,6 @@
 package com.example.kitsuapi.presentation.ui.fragments.manga
 
+import android.util.Log
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -12,8 +13,9 @@ import com.example.kitsuapi.presentation.base.BaseFragment
 import com.example.kitsuapi.presentation.extensions.showText
 import com.example.kitsuapi.presentation.ui.adapters.MangaAdapter
 import com.example.kitsuapi.presentation.ui.state.UIState
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-
+@AndroidEntryPoint
 class MangaFragment : BaseFragment<FragmentMangaBinding>(R.layout.fragment_manga) {
 
     override val binding by viewBinding(FragmentMangaBinding::bind)
@@ -43,6 +45,7 @@ class MangaFragment : BaseFragment<FragmentMangaBinding>(R.layout.fragment_manga
 
                         is UIState.Error -> {
                             showText("Error")
+                            Log.e("ERROR" , it.error )
                         }
 
                         is UIState.Loading -> {

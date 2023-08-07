@@ -1,4 +1,4 @@
-package com.example.kitsuapi.presentation.ui.fragments
+package com.example.kitsuapi.presentation.ui.fragments.home
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -27,6 +27,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 }
                 1 -> {
                     tab.text = "Manga"
+                }
+                2 -> {
+                    tab.text = "User"
                 }
             }
         }

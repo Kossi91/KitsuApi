@@ -1,4 +1,4 @@
-package com.example.kitsuapi.presentation.ui.fragments.anime
+package com.example.kitsuapi.presentation.ui.fragments.user
 
 import android.util.Log
 import androidx.core.view.isVisible
@@ -6,37 +6,36 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.recyclerview.widget.GridLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.kitsuapi.R
-import com.example.kitsuapi.databinding.FragmentAmineBinding
+import com.example.kitsuapi.databinding.FragmentUserBinding
 import com.example.kitsuapi.presentation.base.BaseFragment
 import com.example.kitsuapi.presentation.extensions.showText
-import com.example.kitsuapi.presentation.ui.adapters.AnimeAdapter
+import com.example.kitsuapi.presentation.ui.adapters.UserAdapter
 import com.example.kitsuapi.presentation.ui.state.UIState
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class AmineFragments : BaseFragment<FragmentAmineBinding>(R.layout.fragment_amine) {
+class UserFragment : BaseFragment<FragmentUserBinding>(R.layout.fragment_user) {
 
-    override val binding by viewBinding(FragmentAmineBinding::bind)
-    private val viewModel: AmineViewModel by viewModels()
-    private val animeAdapter = AnimeAdapter()
+    override val binding by viewBinding(FragmentUserBinding::bind)
+    private val viewModel: UserViewModel by viewModels()
+    private val userAdapter = UserAdapter()
 
     override fun initialize() {
         setupRecycler()
     }
 
     override fun setupObserves() {
-        subscribeToAnime()
+        subscribeToUser()
     }
 
     private fun setupRecycler() {
-        binding.recyclerView.adapter = animeAdapter
+        binding.recyclerView.adapter = userAdapter
     }
 
-    private fun subscribeToAnime() {
+    private fun subscribeToUser() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.countriesState.collect {
@@ -44,8 +43,10 @@ class AmineFragments : BaseFragment<FragmentAmineBinding>(R.layout.fragment_amin
                         is UIState.Idle -> {
 
                         }
+
                         is UIState.Error -> {
-                            showText(it.error)
+                            showText("Error")
+                            Log.e("ERROR" , it.error )
                         }
 
                         is UIState.Loading -> {
@@ -53,9 +54,9 @@ class AmineFragments : BaseFragment<FragmentAmineBinding>(R.layout.fragment_amin
                         }
 
                         is UIState.Success -> {
-                            showText("success")
+                            showText("Success")
                             binding.progressBar.isVisible = false
-                            animeAdapter.submitList(it.data)
+                            userAdapter.submitList(it.data)
                         }
                     }
                 }

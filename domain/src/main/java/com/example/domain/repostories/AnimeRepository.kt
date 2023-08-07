@@ -6,5 +6,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface AnimeRepository {
 
-    fun fetchAnime(limit : Int, offset : Int): Flow<Either<String, List<Anime>>>
+    fun fetchAnime(): Flow<Either<String, List<Anime>>>
 }

@@ -7,11 +7,12 @@ import com.example.kitsuapi.presentation.base.BaseViewModel
 import com.example.kitsuapi.presentation.models.manga.MangaUI
 import com.example.kitsuapi.presentation.models.manga.toUI
 import com.example.kitsuapi.presentation.ui.state.UIState
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-
+@HiltViewModel
 class MangaViewModel @Inject constructor (
     private val fetchMangaUseCase: MangaUseCase
 ) : BaseViewModel() {
@@ -20,14 +21,13 @@ class MangaViewModel @Inject constructor (
         MutableStateFlow<UIState<List<MangaUI>>>(UIState.Loading())
     val countriesState = _countriesState.asStateFlow()
 
-
     init {
         fetchMangaById()
     }
 
     private fun fetchMangaById() {
         viewModelScope.launch {
-            fetchMangaUseCase(10, 10).collect { it ->
+            fetchMangaUseCase().collect { it ->
                 when (it) {
                     is Either.Left -> {
                         it.message?.let {
@@ -36,7 +36,7 @@ class MangaViewModel @Inject constructor (
                     }
                     is Either.Right -> {
                         it.data?.let {manga ->
-                            _countriesState.value = UIState.Success(manga.map {it.toUI()})
+                            _countriesState.value = UIState.Success(manga.map { it.toUI() })
                         }
                     }
                 }
