@@ -15,6 +15,7 @@ import com.example.kitsuapi.presentation.ui.adapters.MangaAdapter
 import com.example.kitsuapi.presentation.ui.state.UIState
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+
 @AndroidEntryPoint
 class MangaFragment : BaseFragment<FragmentMangaBinding>(R.layout.fragment_manga) {
 
@@ -30,36 +31,17 @@ class MangaFragment : BaseFragment<FragmentMangaBinding>(R.layout.fragment_manga
         subscribeToManga()
     }
 
+    override fun setupRequest() {
+        viewModel.fetchManga()
+    }
+
     private fun setupRecycler() {
         binding.recyclerView.adapter = mangaAdapter
     }
 
     private fun subscribeToManga() {
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.countriesState.collect {
-                    when (it) {
-                        is UIState.Idle -> {
-
-                        }
-
-                        is UIState.Error -> {
-                            showText("Error")
-                            Log.e("ERROR" , it.error )
-                        }
-
-                        is UIState.Loading -> {
-                            binding.progressBar.isVisible = true
-                        }
-
-                        is UIState.Success -> {
-                            showText("Success")
-                            binding.progressBar.isVisible = false
-                            mangaAdapter.submitList(it.data)
-                        }
-                    }
-                }
-            }
+        viewModel.countriesState.collectPaging {
+            mangaAdapter.submitData(it)
         }
     }
 }

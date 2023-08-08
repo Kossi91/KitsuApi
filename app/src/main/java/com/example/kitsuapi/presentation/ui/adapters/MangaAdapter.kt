@@ -10,7 +10,7 @@ import com.bumptech.glide.Glide
 import com.example.kitsuapi.databinding.ItemMangaBinding
 import com.example.kitsuapi.presentation.models.manga.MangaUI
 
-class MangaAdapter : ListAdapter<MangaUI, MangaAdapter.MangaViewHolder>(diffUtil) {
+class MangaAdapter : PagingDataAdapter<MangaUI, MangaAdapter.MangaViewHolder>(diffUtil) {
     inner class MangaViewHolder(private val binding: ItemMangaBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun onBind(item: MangaUI?) {

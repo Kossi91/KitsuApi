@@ -2,6 +2,7 @@ package com.example.kitsuapi.presentation.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -9,7 +10,7 @@ import com.bumptech.glide.Glide
 import com.example.kitsuapi.databinding.ItemUserBinding
 import com.example.kitsuapi.presentation.models.user.UserUI
 
-class UserAdapter : ListAdapter<UserUI, UserAdapter.UserViewHolder>(diffUtil) {
+class UserAdapter : PagingDataAdapter<UserUI, UserAdapter.UserViewHolder>(diffUtil) {
     inner class UserViewHolder(private val binding: ItemUserBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun onBind(item: UserUI?) {
@@ -18,7 +19,6 @@ class UserAdapter : ListAdapter<UserUI, UserAdapter.UserViewHolder>(diffUtil) {
                 .into(binding.ivImage)
             binding.tvName.text = item?.attributes?.name
         }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {

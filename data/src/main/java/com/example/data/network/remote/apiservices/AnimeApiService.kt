@@ -11,7 +11,7 @@ interface AnimeApiService {
 
     @GET("anime")
     suspend fun getAnime(
-        @Query("page[limit]") limit: Int = 10,
-        @Query("page[offset]") offset: Int = 10
+        @Query("page[limit]") limit: Int,
+        @Query("page[offset]") offset: Int
     ): AnimeResponceDto<AnimeDto>
 }

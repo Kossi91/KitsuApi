@@ -53,4 +53,7 @@ dependencies {
 
     // domain
     implementation(project(":domain"))
+
+    // Paging 3
+    implementation("androidx.paging:paging-runtime-ktx:3.2.0")
 }

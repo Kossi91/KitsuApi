@@ -14,4 +14,6 @@ dependencies {
     // Kotlin
     // Coroutines
     api("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1")
+
+    api("androidx.paging:paging-common-ktx:3.2.0")
 }

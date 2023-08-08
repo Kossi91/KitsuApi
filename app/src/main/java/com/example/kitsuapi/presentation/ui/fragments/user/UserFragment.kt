@@ -31,36 +31,17 @@ class UserFragment : BaseFragment<FragmentUserBinding>(R.layout.fragment_user) {
         subscribeToUser()
     }
 
+    override fun setupRequest() {
+        viewModel.fetchUser()
+    }
+
     private fun setupRecycler() {
         binding.recyclerView.adapter = userAdapter
     }
 
     private fun subscribeToUser() {
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.countriesState.collect {
-                    when (it) {
-                        is UIState.Idle -> {
-
-                        }
-
-                        is UIState.Error -> {
-                            showText("Error")
-                            Log.e("ERROR" , it.error )
-                        }
-
-                        is UIState.Loading -> {
-                            binding.progressBar.isVisible = true
-                        }
-
-                        is UIState.Success -> {
-                            showText("Success")
-                            binding.progressBar.isVisible = false
-                            userAdapter.submitList(it.data)
-                        }
-                    }
-                }
-            }
+        viewModel.countriesState.collectPaging {
+            userAdapter.submitData(it)
         }
     }
 }

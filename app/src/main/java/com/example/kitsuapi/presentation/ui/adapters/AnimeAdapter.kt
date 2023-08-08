@@ -10,7 +10,7 @@ import com.bumptech.glide.Glide
 import com.example.kitsuapi.databinding.ItemAnimeBinding
 import com.example.kitsuapi.presentation.models.anime.AnimeUI
 
-class AnimeAdapter: ListAdapter<AnimeUI, AnimeAdapter.AnimeViewHolder>(diffUtil) {
+class AnimeAdapter: PagingDataAdapter<AnimeUI, AnimeAdapter.AnimeViewHolder>(diffUtil) {
      class AnimeViewHolder(private val binding: ItemAnimeBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun onBind(item: AnimeUI?) {

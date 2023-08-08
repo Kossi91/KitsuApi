@@ -10,5 +10,5 @@ class UserUseCase @Inject constructor(
     private val repository: UserRepository
 ) {
 
-    operator fun invoke() : Flow<Either<String , List<User>>> = repository.fetchUser()
+    operator fun invoke() =repository.fetchUser()
 }

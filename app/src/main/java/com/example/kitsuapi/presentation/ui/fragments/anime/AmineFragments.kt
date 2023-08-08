@@ -32,34 +32,17 @@ class AmineFragments : BaseFragment<FragmentAmineBinding>(R.layout.fragment_amin
         subscribeToAnime()
     }
 
+    override fun setupRequest() {
+        viewModel.fetchAnime()
+    }
+
     private fun setupRecycler() {
         binding.recyclerView.adapter = animeAdapter
     }
 
     private fun subscribeToAnime() {
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.countriesState.collect {
-                    when (it) {
-                        is UIState.Idle -> {
-
-                        }
-                        is UIState.Error -> {
-                            showText(it.error)
-                        }
-
-                        is UIState.Loading -> {
-                            binding.progressBar.isVisible = true
-                        }
-
-                        is UIState.Success -> {
-                            showText("success")
-                            binding.progressBar.isVisible = false
-                            animeAdapter.submitList(it.data)
-                        }
-                    }
-                }
-            }
+        viewModel.countriesState.collectPaging {
+            animeAdapter.submitData(it)
         }
     }
 }
