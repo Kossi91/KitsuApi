@@ -7,6 +7,6 @@ import kotlinx.coroutines.flow.Flow
 
 interface MangaRepository {
 
-    fun fetchManga(): Flow<PagingData<Manga>>
+    fun fetchManga(text: String?, categories: List<String>?): Flow<PagingData<Manga>>
 
 }

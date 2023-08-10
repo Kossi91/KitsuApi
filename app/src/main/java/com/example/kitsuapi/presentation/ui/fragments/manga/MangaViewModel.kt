@@ -1,41 +1,67 @@
 package com.example.kitsuapi.presentation.ui.fragments.manga
 
 import androidx.lifecycle.viewModelScope
+import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import androidx.paging.map
-import com.example.domain.either.Either
-import com.example.domain.repostories.MangaRepository
+import com.example.domain.models.manga.Manga
+import com.example.domain.usecase.CategoriesUseCase
 import com.example.domain.usecase.MangaUseCase
 import com.example.kitsuapi.presentation.base.BaseViewModel
-import com.example.kitsuapi.presentation.models.anime.AnimeUI
-import com.example.kitsuapi.presentation.models.anime.toUI
-import com.example.kitsuapi.presentation.models.manga.MangaUI
-import com.example.kitsuapi.presentation.models.manga.toUI
-import com.example.kitsuapi.presentation.ui.state.UIState
+import com.example.kitsuapi.presentation.models.categories.DataItemCtUI
+import com.example.kitsuapi.presentation.models.categories.toUI
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.flow.flatMapLatest
 import javax.inject.Inject
 
 @HiltViewModel
 class MangaViewModel @Inject constructor(
-    private val repository: MangaRepository
+    private val categoriesUseCase: CategoriesUseCase,
+    private val mangaUseCase: MangaUseCase
 ) : BaseViewModel() {
 
-    private val _countriesState =
-        mutableStateWithPagingFlow<MangaUI>()
-    val countriesState = _countriesState.asStateFlow()
+    val mangaFlow: Flow<PagingData<Manga>>
 
-    fun fetchManga() {
-        viewModelScope.launch {
-            repository.fetchManga().cachedIn(viewModelScope)
-                .collectLatest { it ->
-                    _countriesState.value = it.map {
-                        it.toUI()
-                    }
-                }
+    private val search = MutableStateFlow("")
+    private val filter = MutableStateFlow<List<String>>(emptyList())
+
+    private val _getCategoriesState = mutableUIStateFlow<List<DataItemCtUI>>()
+    val getCategoriesState = _getCategoriesState.asStateFlow()
+
+    init {
+        mangaFlow = combine(search, filter) { search, filter ->
+            Pair(search, filter)
+        }.flatMapLatest { (search, filter) ->
+            if (search.isBlank()) {
+                mangaUseCase.invoke(null, filter)
+                    .debounce(500)
+                    .cachedIn(viewModelScope)
+            } else {
+                mangaUseCase.invoke(search, filter)
+                    .debounce(500)
+                    .cachedIn(viewModelScope)
+            }
+        }
+        categoriesUseCase().gatRequest(_getCategoriesState){
+            it.map { it.toUI() }
+        }
+    }
+
+    fun search(value: String?) {
+        if (search.value == value) return
+        if (value != null) {
+            search.value = value
+        }
+    }
+
+    fun filter(value: List<String>?) {
+        if (this.filter.value == value) return
+        if (value != null) {
+            this.filter.value = value
         }
     }
 }

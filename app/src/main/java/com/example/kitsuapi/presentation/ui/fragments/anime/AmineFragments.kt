@@ -1,5 +1,6 @@
 package com.example.kitsuapi.presentation.ui.fragments.anime
 
+import android.util.Log
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
@@ -68,7 +69,9 @@ class AmineFragments : BaseFragment<FragmentAmineBinding>(R.layout.fragment_amin
     private fun subscribeToCategories() {
         viewModel.getCategoriesState.spectateUiState(
             success = { data -> categoriesAdapter.submitData(data) },
-            error = { showText(it) }
+            error = { showText(it)
+            Log.e("ERROR",it)}
+
         )
     }
 

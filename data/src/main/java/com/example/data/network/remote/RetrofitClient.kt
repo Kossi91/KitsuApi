@@ -25,7 +25,7 @@ class RetrofitClient {
         .build()
 
     private val retrofitClient = Retrofit.Builder()
-        .baseUrl("https://kitsu.io/")
+        .baseUrl("https://kitsu.io/api/")
         .addConverterFactory(GsonConverterFactory.create())
         .client(okHttpClient)
         .build()

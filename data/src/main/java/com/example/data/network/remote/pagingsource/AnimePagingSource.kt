@@ -13,7 +13,7 @@ private val text: String?,
 private val categories: List<String>?,
 ) : PagingSource<Int, Anime>() {
 
-    override suspend fun load(params: PagingSource.LoadParams<Int>): PagingSource.LoadResult<Int, Anime> {
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Anime> {
         val pageIndex = params.key ?: 0
 
         return try {
@@ -21,14 +21,14 @@ private val categories: List<String>?,
                 limit = params.loadSize, offset = pageIndex, text = text,
                 categories = categories
             ).toDomain()
-            PagingSource.LoadResult.Page(
+            LoadResult.Page(
                 data = response.data,
                 nextKey = if (response.data.size == params.loadSize) pageIndex + params.loadSize else null,
                 prevKey = null
             )
 
         } catch (exception: Exception) {
-            PagingSource.LoadResult.Error(exception)
+            LoadResult.Error(exception)
         }
     }
 

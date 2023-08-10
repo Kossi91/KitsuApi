@@ -1,7 +1,7 @@
 package com.example.domain.models.manga
 
 
-data class MangaResponce<T>(
-    val data: List<T>,
+data class MangaResponce(
+    val data: List<Manga>,
     val links: Links
 )

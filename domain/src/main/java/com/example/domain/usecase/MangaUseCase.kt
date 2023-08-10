@@ -10,5 +10,5 @@ class MangaUseCase @Inject constructor(
     private val repository: MangaRepository
 ) {
 
-    operator fun invoke() = repository.fetchManga()
+    operator fun invoke(text: String?, categories: List<String>? ) = repository.fetchManga(text,categories)
 }

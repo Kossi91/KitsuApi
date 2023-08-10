@@ -6,4 +6,26 @@
     </style>
 
     <style name="Theme.KitsuApi" parent="Base.Theme.KitsuApi" />
+
+    <style name="TabTextStyle" parent="TextAppearance.Design.Tab">
+        <item name="textAllCaps">false</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="SearchStyle" parent="Widget.AppCompat.EditText">
+        <item name="android:background">@drawable/custom_search_view</item>
+        <item name="android:drawableStart">@drawable/icon_search</item>
+        <item name="android:drawableTint">@android:color/darker_gray</item>
+        <item name="android:drawablePadding">4dp</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="BottomSheetDialog" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/bottomSheetStyleWrapper</item>
+    </style>
+
+    <style name="bottomSheetStyleWrapper" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@android:color/transparent</item>
+    </style>
 </resources>

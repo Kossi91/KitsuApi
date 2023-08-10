@@ -26,7 +26,6 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AmineViewModel @Inject constructor(
-    private val repository: AnimeRepositoryImpl,
     private val categoriesUseCase: CategoriesUseCase,
     private val animeUseCase: AnimeUseCase
 ) : BaseViewModel() {
@@ -36,24 +35,8 @@ class AmineViewModel @Inject constructor(
     private val search = MutableStateFlow("")
     private val filter = MutableStateFlow<List<String>>(emptyList())
 
-//    private val _countriesState =
-//        mutableStateWithPagingFlow<AnimeUI>()
-//    val countriesState = _countriesState.asStateFlow()
-//
-
     private val _getCategoriesState = mutableUIStateFlow<List<DataItemCtUI>>()
     val getCategoriesState = _getCategoriesState.asStateFlow()
-
-//    fun fetchAnime() {
-//        viewModelScope.launch {
-//            repository.fetchAnime().cachedIn(viewModelScope)
-//                .collectLatest { it ->
-//                    _countriesState.value = it.map {
-//                        it.toUI()
-//                    }
-//                }
-//        }
-//    }
 
     init {
         animeFlow = combine(search, filter) { search, filter ->
