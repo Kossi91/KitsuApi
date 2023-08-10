@@ -29,4 +29,14 @@ object NetworkModule {
     @Singleton
     fun provideUserApiService(retrofitClient: RetrofitClient) =
         retrofitClient.provideUserApiService()
+
+    @Provides
+    @Singleton
+    fun provideSingInApiService(retrofitClient: RetrofitClient) =
+        retrofitClient.provideSingInApiService()
+
+    @Provides
+    @Singleton
+    fun provideCategoriesApiService(retrofitClient: RetrofitClient) =
+        retrofitClient.provideCategoriesApiService()
 }

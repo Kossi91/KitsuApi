@@ -7,7 +7,7 @@ import retrofit2.http.Query
 
 interface UserApiService {
 
-    @GET("users")
+    @GET("api/edge/users")
     suspend fun getUser(
         @Query("page[limit]") limit: Int,
         @Query("page[offset]") offset: Int

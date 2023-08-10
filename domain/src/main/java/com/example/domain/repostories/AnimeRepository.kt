@@ -6,5 +6,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface AnimeRepository {
 
-    fun fetchAnime(): Flow<PagingData<Anime>>
+    fun fetchAnime(text: String?, categories: List<String>?): Flow<PagingData<Anime>>
 }

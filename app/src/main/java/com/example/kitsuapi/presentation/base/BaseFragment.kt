@@ -62,4 +62,33 @@ abstract class BaseFragment<VB: ViewBinding> (@LayoutRes layoutId: Int) : Fragme
             }
         }
     }
+
+    protected fun <T> StateFlow<UIState<T>>.spectateUiState(
+        lifecycleState: Lifecycle.State = Lifecycle.State.STARTED,
+        success: ((data: T) -> Unit)? = null,
+        loading: ((data: UIState.Loading<T>) -> Unit)? = null,
+        error: ((error: String) -> Unit)? = null,
+        idle: ((idle: UIState.Idle<T>) -> Unit)? = null,
+        gatherIfSucceed: ((state: UIState<T>) -> Unit)? = null,
+    ) {
+        collectFlowSafely(lifecycleState) {
+            collect {
+                gatherIfSucceed?.invoke(it)
+                when (it) {
+                    is UIState.Idle -> {
+                        idle?.invoke(it)
+                    }
+                    is UIState.Loading -> {
+                        loading?.invoke(it)
+                    }
+                    is UIState.Error -> {
+                        error?.invoke(it.error)
+                    }
+                    is UIState.Success -> {
+                        success?.invoke(it.data)
+                    }
+                }
+            }
+        }
+    }
 }

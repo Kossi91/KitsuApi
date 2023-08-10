@@ -3,9 +3,8 @@ package com.example.data.network.repostories.base
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import com.example.data.network.remote.pagingsource.base.BaseAnimePagingSource
 import com.example.data.network.remote.pagingsource.base.BaseMangaPagingSource
-import com.example.domain.Resource
+import com.example.domain.either.Either
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
@@ -14,16 +13,18 @@ import kotlinx.coroutines.flow.flowOn
 
 abstract class BaseMangaRepository {
 
-    protected fun <T> doRequest(
-        doSomethingInSuccess: ((T) -> Unit)? = null,
+    internal fun <T> doRequest(
+        gatherIfSucceed: ((T) -> Unit)? = null,
         request: suspend () -> T
-    ) = flow<Resource<T>> {
-        val requestProperty = request()
-        emit(Resource.Success(data = requestProperty))
-        doSomethingInSuccess?.invoke(requestProperty)
-    }.flowOn(Dispatchers.IO).catch { exception ->
-        emit(Resource.Error(message = exception.localizedMessage ?: "Error Occurred!"))
-    }
+    ) =
+        flow<Either<String, T>> {
+            request().also {
+                gatherIfSucceed?.invoke(it)
+                emit(Either.Right(value = it))
+            }
+        }.flowOn(Dispatchers.IO).catch { exception ->
+            emit(Either.Left(value  = exception.localizedMessage ?: "Error Occurred!"))
+        }
 
     protected fun <ValueDto : Any, Value : Any> doPagingRequest(
         pagingSource: BaseMangaPagingSource<ValueDto, Value>,

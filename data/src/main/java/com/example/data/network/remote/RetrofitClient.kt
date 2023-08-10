@@ -1,8 +1,11 @@
 package com.example.data.network.remote
 
 import com.example.data.network.remote.apiservices.AnimeApiService
+import com.example.data.network.remote.apiservices.CategoriesApiService
 import com.example.data.network.remote.apiservices.MangaApiService
+import com.example.data.network.remote.apiservices.SignInApiService
 import com.example.data.network.remote.apiservices.UserApiService
+import com.example.data.network.repostories.TokenInterceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -14,6 +17,7 @@ class RetrofitClient {
 
     private val okHttpClient = OkHttpClient().newBuilder()
         .addInterceptor(provideLoggingInterceptor())
+        .addInterceptor(TokenInterceptor())
         .callTimeout(30,TimeUnit.SECONDS)
         .connectTimeout(30, TimeUnit.SECONDS)
         .readTimeout(30, TimeUnit.SECONDS)
@@ -21,7 +25,7 @@ class RetrofitClient {
         .build()
 
     private val retrofitClient = Retrofit.Builder()
-        .baseUrl("https://kitsu.io/api/edge/")
+        .baseUrl("https://kitsu.io/")
         .addConverterFactory(GsonConverterFactory.create())
         .client(okHttpClient)
         .build()
@@ -33,4 +37,8 @@ class RetrofitClient {
     fun provideMangaApiService() = retrofitClient.create(MangaApiService::class.java)
 
     fun provideUserApiService() = retrofitClient.create(UserApiService::class.java)
+
+    fun provideSingInApiService() = retrofitClient.create(SignInApiService::class.java)
+
+    fun provideCategoriesApiService() = retrofitClient.create(CategoriesApiService::class.java)
 }

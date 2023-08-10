@@ -6,6 +6,7 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import androidx.paging.map
 import com.example.domain.Resource
+import com.example.domain.either.Either
 import com.example.kitsuapi.presentation.ui.state.UIState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -18,6 +19,20 @@ abstract class BaseViewModel : ViewModel() {
     protected fun <T> mutableUIStateFlow() = MutableStateFlow<UIState<T>>(UIState.Idle())
     protected fun <P : Any> mutableStateWithPagingFlow() = MutableStateFlow<PagingData<P>?>(null)
 
+    protected fun <T, S> Flow<Either<String, T>>.gatRequest(
+        state: MutableStateFlow<UIState<S>>,
+        mappedData: (data: T) -> S
+    ) {
+        viewModelScope.launch(Dispatchers.IO) {
+            state.value = UIState.Loading()
+            this@gatRequest.collect {
+                when (it) {
+                    is Either.Left -> state.value = UIState.Error(it.value)
+                    is Either.Right -> state.value = UIState.Success(mappedData(it.value))
+                }
+            }
+        }
+    }
     protected fun <T, S> Flow<Resource<T>>.collectRequest(
         state: MutableStateFlow<UIState<S>>,
         mappedData: (T) -> S

@@ -1,7 +1,7 @@
 package com.example.domain.models.anime
 
 
-data class AnimeResponce<T>(
-    val data: List<T>,
+data class AnimeResponce(
+    val data: List<Anime>,
     val links: Links
 )

@@ -6,6 +6,6 @@ import javax.inject.Inject
 class AnimeUseCase @Inject constructor(
     private val repository: AnimeRepository
 ){
-    operator fun invoke() = repository.fetchAnime()
+    operator fun invoke(text: String?, categories: List<String>?) = repository.fetchAnime(text, categories)
 
 }

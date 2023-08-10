@@ -1,9 +1,11 @@
 package com.example.kitsuapi.di
 
 import com.example.data.network.repostories.AnimeRepositoryImpl
+import com.example.data.network.repostories.CategoriesRepositoryImpl
 import com.example.data.network.repostories.MangaRepositoryImpl
 import com.example.data.network.repostories.UserRepositoryImpl
 import com.example.domain.repostories.AnimeRepository
+import com.example.domain.repostories.CategoriesRepository
 import com.example.domain.repostories.MangaRepository
 import com.example.domain.repostories.UserRepository
 import dagger.Binds
@@ -23,4 +25,7 @@ interface RepositoriesModule {
 
     @Binds
     fun bindUserRepository(repository: UserRepositoryImpl): UserRepository
+
+    @Binds
+    fun bindCategoriesRepository(repository: CategoriesRepositoryImpl): CategoriesRepository
 }

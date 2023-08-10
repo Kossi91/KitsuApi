@@ -9,9 +9,11 @@ import retrofit2.http.Query
 
 interface AnimeApiService {
 
-    @GET("anime")
+    @GET("api/edge/anime")
     suspend fun getAnime(
         @Query("page[limit]") limit: Int,
-        @Query("page[offset]") offset: Int
-    ): AnimeResponceDto<AnimeDto>
+        @Query("page[offset]") offset: Int,
+        @Query("filter[text]") text: String?,
+        @Query("filter[categories]") categories: List<String>?
+    ): AnimeResponceDto
 }
