@@ -11,8 +11,8 @@ data class AttributesDto(
     val name: String = "",
 )
 
-fun AttributesDto.toDomain(): Attributes? = avatar?.let {
-    Attributes(
-        it, name
-    )
-}
+fun AttributesDto.toDomain(): Attributes = Attributes(
+    avatar, name
+)
+
+

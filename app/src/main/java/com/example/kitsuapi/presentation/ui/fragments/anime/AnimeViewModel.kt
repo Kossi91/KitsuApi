@@ -3,29 +3,23 @@ package com.example.kitsuapi.presentation.ui.fragments.anime
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import androidx.paging.map
-import com.example.data.network.repostories.AnimeRepositoryImpl
 import com.example.domain.models.anime.Anime
 import com.example.domain.usecase.AnimeUseCase
 import com.example.domain.usecase.CategoriesUseCase
 import com.example.kitsuapi.presentation.base.BaseViewModel
-import com.example.kitsuapi.presentation.models.anime.AnimeUI
-import com.example.kitsuapi.presentation.models.anime.toUI
 import com.example.kitsuapi.presentation.models.categories.DataItemCtUI
 import com.example.kitsuapi.presentation.models.categories.toUI
-import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-@HiltViewModel
-class AmineViewModel @Inject constructor(
+@OptIn(ExperimentalCoroutinesApi::class, FlowPreview::class)
+class AnimeViewModel(
     private val categoriesUseCase: CategoriesUseCase,
     private val animeUseCase: AnimeUseCase
 ) : BaseViewModel() {

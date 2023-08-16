@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/sing_graph.xml"
+    app:startDestination="@id/singInFragment">
+
+    <fragment
+        android:id="@+id/singInFragment"
+        android:name="com.example.kitsuapi.presentation.ui.fragments.singin.SingInFragment"
+        android:label="fragment_sing_in"
+        tools:layout="@layout/fragment_sing_in" >
+        <action
+            android:id="@+id/action_singInFragment_to_boardFragment"
+            app:destination="@id/boardFragment"
+            app:popUpTo="@id/sing_graph.xml"
+            app:popUpToInclusive="true"/>
+    </fragment>
+    <fragment
+        android:id="@+id/boardFragment"
+        android:name="com.example.kitsuapi.presentation.ui.fragments.onboard.BoardFragment"
+        android:label="fragment_board"
+        tools:layout="@layout/fragment_board" >
+        <action
+            android:id="@+id/action_boardFragment_to_singInFragment"
+            app:destination="@id/singInFragment"
+            app:popUpTo="@id/sing_graph.xml"
+            app:popUpToInclusive="true" />
+    </fragment>
+</navigation>

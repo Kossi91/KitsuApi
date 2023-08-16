@@ -1,6 +1,6 @@
 package com.example.data.network.remote.dtos.user
 
-import com.example.domain.models.manga.Links
+import com.example.domain.models.user.Links
 import com.google.gson.annotations.SerializedName
 
 data class LinksDto(

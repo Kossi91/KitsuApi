@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="Theme.AppSplash" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">#2E2121</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/kitsu</item>
+        <item name="android:windowSplashScreenBrandingImage">@drawable/geeks_ui</item>
+        <item name="windowSplashScreenAnimationDuration">3000</item>
+        <item name="postSplashScreenTheme">@style/Theme.KitsuApi</item>
+
+        <!-- Status bar and Nav bar configs -->
+        <item name="android:statusBarColor" tools:targetApi="l">#2E2121</item>
+        <item name="android:navigationBarColor">#2E2121</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+</resources>

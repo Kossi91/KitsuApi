@@ -112,4 +112,23 @@ dependencies {
     // CircleImageView
     implementation("de.hdodenhof:circleimageview:3.1.0")
 
+    // SplashScreen
+    implementation("androidx.core:core-splashscreen:1.0.1")
+
+    // Dots Indicator
+    implementation("com.tbuonomo:dotsindicator:5.0")
+
+    // Koin for Android
+    implementation ("io.insert-koin:koin-android:3.4.0")
+
+
+    //Retrofit 2
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    //Gson
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+
+    // OkHttp
+    implementation("com.squareup.okhttp3:okhttp-bom:5.0.0-alpha.6")
+    implementation("com.squareup.okhttp3:okhttp")
+    implementation("com.squareup.okhttp3:logging-interceptor")
 }

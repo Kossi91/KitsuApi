@@ -1,12 +1,8 @@
 package com.example.domain.usecase
 
-import com.example.domain.either.Either
-import com.example.domain.models.user.User
 import com.example.domain.repostories.UserRepository
-import kotlinx.coroutines.flow.Flow
-import javax.inject.Inject
 
-class UserUseCase @Inject constructor(
+class UserUseCase (
     private val repository: UserRepository
 ) {
 

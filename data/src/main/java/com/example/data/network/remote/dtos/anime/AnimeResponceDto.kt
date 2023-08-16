@@ -14,5 +14,5 @@ fun AnimeResponceDto.toDomain() = AnimeResponce(
     data = data.map {
         it.toDomain()
     },
-    links = links.toDomain()
+    links.toDomain()
 )

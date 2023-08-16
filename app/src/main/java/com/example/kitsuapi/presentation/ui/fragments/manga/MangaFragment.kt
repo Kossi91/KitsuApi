@@ -2,7 +2,6 @@ package com.example.kitsuapi.presentation.ui.fragments.manga
 
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
 import androidx.paging.map
@@ -19,21 +18,19 @@ import com.example.kitsuapi.presentation.ui.adapters.CategoriesAdapter
 import com.example.kitsuapi.presentation.ui.adapters.DefaultLoadStateAdapter
 import com.example.kitsuapi.presentation.ui.adapters.MangaAdapter
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-@AndroidEntryPoint
 class MangaFragment : BaseFragment<FragmentMangaBinding>(R.layout.fragment_manga) {
 
     override val binding by viewBinding(FragmentMangaBinding::bind)
-    private val viewModel: MangaViewModel by viewModels()
+    private val viewModel by viewModel<MangaViewModel>()
     private val mangaAdapter = MangaAdapter()
     private val categoriesList = arrayListOf<DataItemCtUI>()
     private val categoriesAdapter: CategoriesAdapter by lazy {
         CategoriesAdapter(categoriesList)
     }
-
 
     override fun initialize() {
         setupRecycler()

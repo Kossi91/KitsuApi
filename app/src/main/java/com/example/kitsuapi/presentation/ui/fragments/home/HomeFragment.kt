@@ -25,11 +25,17 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 0 -> {
                     tab.text = "Anime"
                 }
+
                 1 -> {
                     tab.text = "Manga"
                 }
+
                 2 -> {
                     tab.text = "User"
+                }
+
+                3 -> {
+                    tab.text = "Post"
                 }
             }
         }

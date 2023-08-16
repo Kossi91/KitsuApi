@@ -24,11 +24,10 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
-@AndroidEntryPoint
 class AmineFragments : BaseFragment<FragmentAmineBinding>(R.layout.fragment_amine) {
 
     override val binding by viewBinding(FragmentAmineBinding::bind)
-    private val viewModel: AmineViewModel by viewModels()
+    private val viewModel by viewModels<AnimeViewModel>()
     private val animeAdapter = AnimeAdapter()
     private val categoriesList = arrayListOf<DataItemCtUI>()
     private val categoriesAdapter: CategoriesAdapter by lazy {

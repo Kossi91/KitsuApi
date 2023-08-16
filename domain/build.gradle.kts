@@ -16,4 +16,11 @@ dependencies {
     api("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1")
 
     api("androidx.paging:paging-common-ktx:3.2.0")
+
+    api ("io.insert-koin:koin-core:3.4.0")
+
+    //Retrofit 2
+    api("com.squareup.retrofit2:retrofit:2.9.0")
+    //Gson
+    api("com.squareup.retrofit2:converter-gson:2.9.0")
 }

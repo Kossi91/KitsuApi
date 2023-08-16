@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#2E2121"
+    android:orientation="vertical"
+    tools:context=".presentation.ui.fragments.singin.SingInFragment">
+
+    <ImageView
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="25dp"
+        android:src="@drawable/kitsu" />
+
+    <EditText
+        android:id="@+id/et_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/custom_search_view"
+        android:drawableStart="@drawable/icon_email"
+        android:hint="@string/email"
+        android:textColor="#2E2121" />
+
+    <EditText
+        android:id="@+id/et_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/custom_search_view"
+        android:drawableStart="@drawable/icon_password"
+        android:hint="@string/password"
+        android:inputType="textPassword"
+        android:textColor="#2E2121" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btm_singin"
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="20dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="25dp"
+        android:backgroundTint="#439B47"
+        android:text="Sing In"
+        android:textAllCaps="true" />
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="25dp"
+        android:indeterminateTint="#FF5722"
+        android:visibility="gone" />
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>

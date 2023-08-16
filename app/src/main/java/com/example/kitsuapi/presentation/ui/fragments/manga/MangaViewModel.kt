@@ -10,6 +10,8 @@ import com.example.kitsuapi.presentation.base.BaseViewModel
 import com.example.kitsuapi.presentation.models.categories.DataItemCtUI
 import com.example.kitsuapi.presentation.models.categories.toUI
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -18,8 +20,8 @@ import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.flatMapLatest
 import javax.inject.Inject
 
-@HiltViewModel
-class MangaViewModel @Inject constructor(
+@OptIn(ExperimentalCoroutinesApi::class, FlowPreview::class)
+class MangaViewModel (
     private val categoriesUseCase: CategoriesUseCase,
     private val mangaUseCase: MangaUseCase
 ) : BaseViewModel() {
