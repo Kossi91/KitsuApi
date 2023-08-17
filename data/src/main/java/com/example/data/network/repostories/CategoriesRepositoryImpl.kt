@@ -9,7 +9,7 @@ import com.example.domain.repostories.CategoriesRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class CategoriesRepositoryImpl @Inject constructor(
+class CategoriesRepositoryImpl(
     private val apiService: CategoriesApiService
 ) : CategoriesRepository {
 

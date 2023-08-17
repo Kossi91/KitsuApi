@@ -11,12 +11,6 @@ import org.koin.dsl.module
 
 val appModule = module {
 
-    viewModel<SingInViewModel> {
-        SingInViewModel(
-            singInUseCase = get()
-        )
-    }
-
     viewModel<AnimeViewModel> {
         AnimeViewModel(
             animeUseCase = get(),
@@ -33,9 +27,16 @@ val appModule = module {
 
     viewModel<UserViewModel> {
         UserViewModel(
-            repository = get()
+            userUseCase = get()
         )
     }
+
+    viewModel<SingInViewModel> {
+        SingInViewModel(
+            singInUseCase = get()
+        )
+    }
+
     viewModel<PostViewModel> {
         PostViewModel(
              postsUseCase = get(),

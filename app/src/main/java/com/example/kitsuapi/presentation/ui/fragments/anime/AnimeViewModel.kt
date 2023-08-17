@@ -20,8 +20,8 @@ import kotlinx.coroutines.flow.*
 
 @OptIn(ExperimentalCoroutinesApi::class, FlowPreview::class)
 class AnimeViewModel(
-    private val categoriesUseCase: CategoriesUseCase,
-    private val animeUseCase: AnimeUseCase
+    private val animeUseCase: AnimeUseCase,
+    private val categoriesUseCase: CategoriesUseCase
 ) : BaseViewModel() {
 
     val animeFlow: Flow<PagingData<Anime>>

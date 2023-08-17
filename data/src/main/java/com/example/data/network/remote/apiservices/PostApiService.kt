@@ -5,7 +5,7 @@ import com.example.data.network.remote.dtos.post.PostResponseDto
 import retrofit2.http.*
 
 interface PostApiService {
-    @GET("api/edge/posts")
+    @GET("edge/posts")
     suspend fun getPosts(
         @Query("page[limit]") limit: Int,
         @Query("page[offset]") offset: Int,
@@ -13,7 +13,7 @@ interface PostApiService {
     ): PostResponseDto
 
     @Headers("Content-Type: application/vnd.api+json")
-    @POST("api/edge/posts")
+    @POST("edge/posts")
     suspend fun createPost(
         @Body body: CreatePostDto?
     )

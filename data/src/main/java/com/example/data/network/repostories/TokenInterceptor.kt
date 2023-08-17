@@ -7,17 +7,16 @@ import okhttp3.Response
 import okhttp3.ResponseBody
 import okhttp3.ResponseBody.Companion.toResponseBody
 import java.net.ProtocolException
-import javax.inject.Inject
 
 class TokenInterceptor(
-    private val tokenManager: TokenPreferenceHelper
+    private val tokenPreferenceHelper: TokenPreferenceHelper
 ) : Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
         var request = chain.request()
         val builder = request.newBuilder()
         if (request.header("Authorization") == null) {
-            tokenManager.accessToken?.let { token ->
+            tokenPreferenceHelper.accessToken?.let { token ->
                 builder.addHeader(
                     "Authorization:",
                     "Bearer $token"

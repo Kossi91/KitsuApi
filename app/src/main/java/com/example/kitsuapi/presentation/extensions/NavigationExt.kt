@@ -12,6 +12,6 @@ fun Fragment.activityNavController() = requireActivity().findNavController(R.id.
 fun NavController.navigateSafely(@IdRes actionId: Int) {
     currentDestination?.getAction(actionId)?.let { navigate(actionId) }
 }
-fun NavController.navigateSafely(directions: NavDirections) {
+fun NavController.navigateSafe(directions: NavDirections) {
     currentDestination?.getAction(directions.actionId)?.let { navigate(directions) }
 }

@@ -28,4 +28,12 @@
     <style name="bottomSheetStyleWrapper" parent="Widget.Design.BottomSheet.Modal">
         <item name="android:background">@android:color/transparent</item>
     </style>
+
+    <style name="Theme.SplashScreen.Starting" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">#2E2121</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/kitsu</item>
+        <item name="android:windowSplashScreenBrandingImage" tools:targetApi="s">@drawable/geeks_ui
+        </item>
+        <item name="postSplashScreenTheme">@style/Theme.KitsuApi</item>
+    </style>
 </resources>

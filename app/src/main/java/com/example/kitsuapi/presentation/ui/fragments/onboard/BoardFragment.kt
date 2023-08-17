@@ -9,7 +9,6 @@ import com.example.kitsuapi.R
 import com.example.kitsuapi.databinding.FragmentBoardBinding
 import com.example.kitsuapi.presentation.base.BaseFragment
 import com.example.kitsuapi.presentation.extensions.navigateSafely
-import com.example.kitsuapi.presentation.extensions.showText
 import com.example.kitsuapi.presentation.ui.adapters.OnBoardAdapter
 import org.koin.android.ext.android.inject
 
@@ -19,7 +18,6 @@ class BoardFragment : BaseFragment<FragmentBoardBinding>(R.layout.fragment_board
     private val tokenPreferenceHelper: TokenPreferenceHelper by inject()
 
     override fun initialize() {
-        showText("Bord")
         binding.viewPager.adapter = OnBoardAdapter(requireContext())
         binding.dotsIndicator.attachTo(binding.viewPager)
 

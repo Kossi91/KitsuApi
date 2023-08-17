@@ -31,6 +31,11 @@
     <string name="nsfw">NSFW</string>
     <string name="unknown_error">Unknown error</string>
     <string name="input_text">Input text</string>
+    <string name="_10_minutes_ago">10 minutes ago</string>
+    <string name="edited_10_minutes_ago">Edited 10 minutes ago</string>
+    <string name="this_post_contains_spoilers">This post contains spoilers</string>
+    <string name="o_o">(o_o)</string>
+    <string name="kossi">Kossi</string>
 
     <style name="TabLayoutTextStyle">
         <item name="textAllCaps">false</item>

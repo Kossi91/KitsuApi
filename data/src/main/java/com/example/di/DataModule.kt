@@ -22,11 +22,6 @@ import com.example.domain.repostories.UserRepository
 import org.koin.dsl.module
 
 val dataModule = module {
-    single<CategoriesRepository> {
-        CategoriesRepositoryImpl(
-            apiService = get<CategoriesApiService>()
-        )
-    }
 
     single<AnimeRepository> {
         AnimeRepositoryImpl(
@@ -34,17 +29,25 @@ val dataModule = module {
         )
     }
 
+    single<CategoriesRepository> {
+        CategoriesRepositoryImpl(
+            apiService = get<CategoriesApiService>()
+        )
+    }
+
+
     single<MangaRepository> {
         MangaRepositoryImpl(
             apiService = get<MangaApiService>()
         )
     }
 
-    single<UserRepository> {
-        UserRepositoryImpl(
-            apiService = get<UserApiService>()
+    single<PostRepository> {
+        PostRepositoryImpl(
+            apiService = get<PostApiService>()
         )
     }
+
 
     single<SingInRepository> {
         SingInRepositoryImpl(
@@ -56,9 +59,9 @@ val dataModule = module {
         TokenPreferenceHelper(context = get())
     }
 
-    single<PostRepository> {
-        PostRepositoryImpl(
-            apiService = get<PostApiService>()
+    single<UserRepository> {
+        UserRepositoryImpl(
+            apiService = get<UserApiService>()
         )
     }
 }

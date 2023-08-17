@@ -8,9 +8,8 @@ import com.example.domain.either.Either
 import com.example.domain.models.auth.LoginResponse
 import com.example.domain.repostories.SingInRepository
 import kotlinx.coroutines.flow.Flow
-import javax.inject.Inject
 
-class SingInRepositoryImpl @Inject constructor(
+class SingInRepositoryImpl(
     private val apiService: SignInApiService
 ) : SingInRepository {
 

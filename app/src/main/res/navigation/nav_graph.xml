@@ -2,30 +2,32 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_graph.xml"
+    android:id="@+id/nav_graph"
     tools:ignore="InvalidNavigation">
-
-
-    <action
-        android:id="@+id/action_global_signFlowFragment"
-        app:destination="@id/singInFlowFragment"
-        app:popUpTo="@id/nav_graph.xml" />
-
-    <action
-        android:id="@+id/action_global_homeFlowFragment"
-        app:destination="@id/homeFlowFragment"
-        app:popUpTo="@id/nav_graph.xml" />
 
     <fragment
         android:id="@+id/homeFlowFragment"
         android:name="com.example.kitsuapi.presentation.ui.fragments.home.HomeFlowFragment"
         android:label="fragment_home_flow"
-        tools:layout="@layout/fragment_home_flow" />
+        tools:layout="@layout/fragment_home_flow" >
+    </fragment>
 
     <fragment
         android:id="@+id/singInFlowFragment"
         android:name="com.example.kitsuapi.presentation.ui.fragments.singin.SingInFlowFragment"
         android:label="fragment_sing_in_flow"
         tools:layout="@layout/fragment_sing_in_flow" >
+        <action
+            android:id="@+id/action_singInFlowFragment_to_homeFlowFragment2"
+            app:destination="@id/homeFlowFragment" />
     </fragment>
+
+    <action android:id="@+id/action_global_singInFlowFragment"
+        app:destination="@id/singInFlowFragment"
+        app:popUpTo="@id/nav_graph" />
+
+    <action android:id="@+id/action_global_homeFlowFragment"
+        app:destination="@id/homeFlowFragment"
+        app:popUpTo="@id/nav_graph" />
+
 </navigation>

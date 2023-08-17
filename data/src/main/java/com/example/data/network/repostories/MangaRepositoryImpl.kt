@@ -12,7 +12,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class MangaRepositoryImpl @Inject constructor(private val apiService: MangaApiService): MangaRepository {
+class MangaRepositoryImpl (private val apiService: MangaApiService): MangaRepository {
 
     override fun fetchManga(text: String?, categories: List<String>?): Flow<PagingData<Manga>> {
         return Pager(

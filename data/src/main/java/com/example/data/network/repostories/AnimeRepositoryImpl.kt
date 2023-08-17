@@ -12,7 +12,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class AnimeRepositoryImpl @Inject constructor
+class AnimeRepositoryImpl
     (private val apiService: AnimeApiService) :
     AnimeRepository {
     override fun fetchAnime(text: String?, categories: List<String>?): Flow<PagingData<Anime>>{

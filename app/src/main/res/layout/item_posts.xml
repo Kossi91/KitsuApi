@@ -19,7 +19,7 @@
             android:id="@+id/iv_user_avatar"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:src="@drawable/ic_launcher_background"
+            android:src="@drawable/ava"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Full" />
@@ -29,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="Imperyalis"
+            android:text="@string/kossi"
             android:textColor="#B00C0C"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -40,7 +40,7 @@
             android:id="@+id/tv_posted_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="6 minutes ago"
+            android:text="@string/_10_minutes_ago"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/tv_username"
@@ -51,7 +51,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="Edited 5 minutes ago"
+            android:text="@string/edited_10_minutes_ago"
             android:textSize="12sp"
             app:layout_constraintStart_toEndOf="@+id/tv_posted_date"
             app:layout_constraintTop_toTopOf="@+id/tv_posted_date" />
@@ -65,7 +65,7 @@
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="8dp"
         android:textColor="@color/black"
-        tools:text="IMHO, a fragment should neither know nor care about the BACK button. An activity could care about the BACK button, though with fragments that is normally handled by FragmentManager" />
+        tools:text="@string/on_board_1_title" />
 
     <ImageView
         android:id="@+id/iv_content_image"
@@ -73,7 +73,7 @@
         android:layout_height="290dp"
         android:layout_marginTop="16dp"
         android:scaleType="centerCrop"
-        tools:src="@drawable/ic_launcher_background" />
+        tools:src="@drawable/on_board_1" />
 
     <LinearLayout
         android:id="@+id/spoiler_container"
@@ -88,7 +88,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="This post contains spoilers"
+            android:text="@string/this_post_contains_spoilers"
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -97,7 +97,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end|center_vertical"
             android:layout_marginStart="16dp"
-            android:text="XXXX"
+            android:text="@string/o_o"
             android:textColor="@android:color/darker_gray"
             android:textSize="32sp" />
 

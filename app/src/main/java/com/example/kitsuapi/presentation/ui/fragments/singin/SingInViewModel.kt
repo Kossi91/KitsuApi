@@ -10,13 +10,13 @@ class SingInViewModel (
     private val singInUseCase: SingInUseCase
 ) : BaseViewModel() {
 
-    private val _getLoginState = mutableUIStateFlow<LoginResponseUI>()
-    val getLoginState = _getLoginState.asStateFlow()
+    private val _getSingInState = mutableUIStateFlow<LoginResponseUI>()
+    val getSingInState = _getSingInState.asStateFlow()
 
     fun login(email: String, password: String) {
         singInUseCase(
             email = email,
             password = password
-        ).gatRequest(_getLoginState) { it.toUI() }
+        ).gatRequest(_getSingInState) { it.toUI() }
     }
 }

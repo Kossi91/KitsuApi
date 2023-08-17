@@ -3,7 +3,6 @@ package com.example.kitsuapi.presentation.ui.fragments.anime
 import android.util.Log
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
 import androidx.paging.map
@@ -20,14 +19,14 @@ import com.example.kitsuapi.presentation.ui.adapters.AnimeAdapter
 import com.example.kitsuapi.presentation.ui.adapters.CategoriesAdapter
 import com.example.kitsuapi.presentation.ui.adapters.DefaultLoadStateAdapter
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class AmineFragments : BaseFragment<FragmentAmineBinding>(R.layout.fragment_amine) {
 
     override val binding by viewBinding(FragmentAmineBinding::bind)
-    private val viewModel by viewModels<AnimeViewModel>()
+    private val viewModel by viewModel<AnimeViewModel>()
     private val animeAdapter = AnimeAdapter()
     private val categoriesList = arrayListOf<DataItemCtUI>()
     private val categoriesAdapter: CategoriesAdapter by lazy {

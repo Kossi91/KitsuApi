@@ -1,5 +1,6 @@
 package com.example.kitsuapi.presentation.ui.fragments.createpost
 
+import android.util.Log
 import android.view.View
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -15,7 +16,6 @@ class CreatePostFragment : BaseFragment<FragmentCreatePostBinding>(R.layout.frag
 
     override val binding by viewBinding(FragmentCreatePostBinding::bind)
     private val viewModel by viewModel<CreatePostViewModel>()
-
     private var user: UserUI? = null
 
     override fun setupListener() {
@@ -67,6 +67,7 @@ class CreatePostFragment : BaseFragment<FragmentCreatePostBinding>(R.layout.frag
             error = {
                 binding.progressBar.visibility = View.GONE
                 showText(it)
+                Log.e("Aziz" , it.toString())
             }
         )
     }
