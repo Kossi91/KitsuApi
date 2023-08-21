@@ -12,17 +12,36 @@ import com.example.kitsuapi.presentation.extensions.navigateSafely
 import com.example.kitsuapi.presentation.ui.adapters.OnBoardAdapter
 import org.koin.android.ext.android.inject
 
+/**
+ * [BoardFragment] наследуется от класса BaseFragment, который является базовым классом
+ * для фрагментов в приложении. Класс BoardFragment используется для отображения экрана
+ * Onboarding в приложении, который отображает экран входа в приложение иобеспечивает
+ * навигацию пользователя по первоначальной информации о приложении.
+ * @author Aziz
+ * @since 1.0v
+ */
 class BoardFragment : BaseFragment<FragmentBoardBinding>(R.layout.fragment_board) {
 
     override val binding by viewBinding(FragmentBoardBinding::bind)
     private val tokenPreferenceHelper: TokenPreferenceHelper by inject()
 
+    /**
+     * Метод [initialize] используется для инициализации элементов пользовательского интерфейса.
+     * В данном случае, установлен адаптер OnBoardAdapter для ViewPager, а WormDotsIndicator
+     * прикреплен к ViewPager.
+     */
     override fun initialize() {
         binding.viewPager.adapter = OnBoardAdapter(requireContext())
         binding.dotsIndicator.attachTo(binding.viewPager)
-
     }
 
+    /**
+     * Метод [setupListener] используется для настройки обработчиков событий пользовательского
+     * ввода. В данном случае, установлены обработчики для кнопок btnNext и btnStart, которые
+     * перемещают ViewPager на следующий экран и переходят на фрагмент LoginFragment соответственно.
+     * Также установлен обратный вызов для ViewPager, который скрывает кнопку btnNext и отображает
+     * кнопку btnStart при достижении последнего экрана в ViewPager.
+     */
     override fun setupListener() {
         binding.btmNext.setOnClickListener {
             binding.viewPager.currentItem++

@@ -9,6 +9,13 @@ import com.example.kitsuapi.databinding.FragmentHomeBinding
 import com.example.kitsuapi.presentation.ui.adapters.HomeAdapter
 import com.google.android.material.tabs.TabLayoutMediator
 
+/**
+ * [HomeFragment] Класс MainFragment отвечает за управление
+ * главным экраном приложения. Он показывает ViewPager с четырьмя разными вкладками,
+ * каждая из которых содержит свой фрагмент.
+ * @author Aziz
+ * @since 1.0v
+ */
 class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private val binding by viewBinding(FragmentHomeBinding::bind)
@@ -17,7 +24,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         super.onViewCreated(view, savedInstanceState)
         tabLayout()
     }
-
+    /**
+     * [tabLayout] Добавляет фрагменты и их заголовки в ViewPager.
+     */
     private fun tabLayout() = with(binding) {
         viewPager.adapter = HomeAdapter(this@HomeFragment)
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, pos ->

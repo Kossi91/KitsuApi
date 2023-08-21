@@ -11,8 +11,16 @@ import com.example.domain.either.Either
 import com.example.domain.models.user.User
 import com.example.domain.repostories.UserRepository
 import kotlinx.coroutines.flow.Flow
-
+/**
+ * Класс [UserRepositoryImpl] реализует интерфейс [UserRepository]. Он предоставляет методы
+ * для получения пользователей и информации о них с помощью API-сервиса.
+ */
 class UserRepositoryImpl(private val apiService: UserApiService):UserRepository {
+
+    /**
+     * [fetchUser] Получить пользователей в виде пагинации
+     * @return [Flow] пагинированных данных пользователей
+     */
     override fun fetchUser() : Flow<PagingData<User>> {
         return Pager(
             config = PagingConfig(
@@ -26,11 +34,21 @@ class UserRepositoryImpl(private val apiService: UserApiService):UserRepository 
         ).flow
     }
 
+    /**
+     * [fetchUsersByName] Получить список пользователей с указанным именем
+     * @param name имя пользователя для поиска
+     * @return [Flow] списка пользователей или ошибки
+     */
     override fun fetchUsersByName(name: String?): Flow<Either<String, List<User>>> =
         doRequest {
             apiService.fetchUsersByName(name).toDomain().data
         }
 
+    /**
+     * [fetchUserByPostId] Получить пользователя по идентификатору поста
+     * @param id идентификатор поста
+     * @return пользователь или ошибка
+     */
     override suspend fun fetchUserByPostId(id: String): User {
         return apiService.fetchUserByPostId(id).toDomain().data
     }

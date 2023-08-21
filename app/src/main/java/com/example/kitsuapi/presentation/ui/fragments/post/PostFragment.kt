@@ -14,7 +14,12 @@ import com.example.kitsuapi.presentation.ui.adapters.PostsAdapter
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
-
+/**
+ * [PostFragment] PostsFragment наследуется от [BaseFragment], который содержит общую
+ * логику для фрагментов в приложении.В данном фрагменте реализуется отображение списка постов.
+ * @author Aziz
+ * @since 1.0v
+ */
 class PostFragment : BaseFragment<FragmentPostBinding>(R.layout.fragment_post) {
 
     override val binding by viewBinding(FragmentPostBinding::bind)
@@ -22,7 +27,9 @@ class PostFragment : BaseFragment<FragmentPostBinding>(R.layout.fragment_post) {
     private val postsAdapter: PostsAdapter by lazy {
         PostsAdapter(this::onItemClick)
     }
-
+    /**
+     * [initialize] используется для инициализации элементов пользовательского интерфейса.
+     */
     override fun initialize() {
         binding.rvPosts.adapter = postsAdapter
         postsAdapter.addLoadStateListener {
@@ -30,10 +37,19 @@ class PostFragment : BaseFragment<FragmentPostBinding>(R.layout.fragment_post) {
         }
     }
 
+    /**
+     * [setupObserves] метод для наблюдания за данными,
+     * получаемыми из ViewModel.
+     */
     override fun setupObserves() {
         subscribeToPosts()
     }
 
+    /**
+     * [subscribeToPosts] Так как с бэка не приходит пользователь
+     * опубликовавший пост, при маппинге через id поста происходит запрос на пользователя
+     * и данные записываются в специальную пустую модельку и передаются в адаптер
+     */
     private fun subscribeToPosts() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.postsFlow.collectLatest {
@@ -45,7 +61,9 @@ class PostFragment : BaseFragment<FragmentPostBinding>(R.layout.fragment_post) {
             }
         }
     }
-
+    /**
+     * [onItemClick] В данном методе реализуется отображение тоста с идентификатором элемента списка.
+     */
     private fun onItemClick(id: String) {
         showText(id)
     }

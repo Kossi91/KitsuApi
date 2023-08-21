@@ -8,6 +8,14 @@ import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.example.kitsuapi.databinding.ItemCategoriesBinding
 import com.example.kitsuapi.presentation.models.categories.DataItemCtUI
 
+/**
+ * [CategoriesAdapter] используется для отображения списка категорий
+ * в виде чекбоксов. Адаптер принимает список категорий типа CategoriesDataUI, где каждая категория
+ * представлена атрибутами (attributes) в объекте класса CategoriesDataUI. Каждый элемент списка
+ * отображается в виде текста с чекбоксом, который может быть выделен или снят. Класс также
+ * содержит методы для получения выбранных элементов [getSelectedItems], очистки выбранных
+ * элементов [clearSelectedItems] и обновления данных [submitData].
+ */
 class CategoriesAdapter(
     private var categoriesList: List<DataItemCtUI>
 ) : Adapter<CategoriesAdapter.CategoriesViewHolder>() {

@@ -20,7 +20,9 @@ import com.example.domain.repostories.PostRepository
 import com.example.domain.repostories.SingInRepository
 import com.example.domain.repostories.UserRepository
 import org.koin.dsl.module
-
+/**
+ * [dataModule] koin module для зависимостей data модуля
+ */
 val dataModule = module {
 
     single<AnimeRepository> {

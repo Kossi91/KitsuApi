@@ -9,6 +9,10 @@ import com.example.kitsuapi.presentation.ui.fragments.user.UserViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
+/**
+* [appModule] koin module для зависимостей app модуля
+*/
+
 val appModule = module {
 
     viewModel<AnimeViewModel> {

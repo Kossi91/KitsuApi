@@ -12,16 +12,29 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
+/**
+ * [UserFragment] UsersFragment наследуется от [BaseFragment], который содержит общую
+ * логику для фрагментов в приложении и представляет собой фрагмент
+ * отображающий список пользователей
+ * @author Aziz
+ * @since 1.0v
+ */
 class UserFragment : BaseFragment<FragmentUserBinding>(R.layout.fragment_user) {
 
     override val binding by viewBinding(FragmentUserBinding::bind)
     private val viewModel by viewModel<UserViewModel>()
     private val userAdapter = UserAdapter()
 
+    /**
+     * [initialize] используется для инициализации элементов пользовательского интерфейса.
+     */
     override fun initialize() {
         setupRecycler()
     }
-
+    /**
+     * [setupObserves] подписывается на flow и обновляет
+     * [UserAdapter] при получении новых данных.
+     */
     override fun setupObserves() {
         setupRequest()
     }
@@ -32,6 +45,9 @@ class UserFragment : BaseFragment<FragmentUserBinding>(R.layout.fragment_user) {
             }
         }
     }
+    /**
+     * [setupRecycler] настраивает RecyclerView с помощью адаптера.
+     */
     private fun setupRecycler() {
         binding.recyclerView.adapter = userAdapter
     }

@@ -15,6 +15,10 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
+/**
+ * [BaseFragment] Абстрактный класс BaseFragment является базовым классом для всех фрагментов
+ * в приложении и содержит общую логику, которую можно переопределить в наследниках.
+ */
 abstract class BaseFragment<VB: ViewBinding> (@LayoutRes layoutId: Int) : Fragment(layoutId) {
 
     protected abstract val binding : VB
@@ -28,14 +32,31 @@ abstract class BaseFragment<VB: ViewBinding> (@LayoutRes layoutId: Int) : Fragme
         setupObserves()
     }
 
+    /**
+     * [initialize] метод, который вызывается при создании фрагмента и может быть переопределен
+     * в наследниках, чтобы инициализировать какие-либо необходимые данные или переменные.
+     */
     protected open fun initialize(){}
 
     protected open fun setupViews(){}
 
+    /**
+     * [setupListeners] метод, который вызывается после установки запросов и может быть переопределен
+     * в наследниках, чтобы установить слушатели для каких-либо View или других элементов
+     * пользовательского интерфейса.
+     */
     protected open fun setupListener(){}
-
+    /**
+     * [setupRequest] метод, который вызывается после инициализации и может быть переопределен в
+     * наследниках, чтобы установить какие-либо запросы к серверу или базе данных.
+     */
     protected open fun setupRequest(){}
 
+    /**
+     * [setupObserves] setupObserves() - метод, который вызывается после установки слушателей
+     * и может быть переопределен в наследниках, чтобы установить наблюдателей за данными,
+     * получаемыми из ViewModel или других источников.
+     */
     protected open fun setupObserves(){}
 
     protected fun <T> StateFlow<UIState<T>>.collectUIState(

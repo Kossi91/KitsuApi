@@ -17,6 +17,9 @@ import com.example.domain.usecase.SingInUseCase
 import com.example.domain.usecase.UserUseCase
 import org.koin.dsl.module
 
+/**
+ * [domainModule] koin module для зависимостей domain модуля
+ */
 
 val domainModule = module {
     factory<AnimeUseCase> {

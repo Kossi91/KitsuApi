@@ -9,8 +9,20 @@ import com.example.kitsuapi.R
 import com.example.kitsuapi.databinding.PagerBoardBinding
 import com.example.kitsuapi.presentation.models.onboard.OnBoardUI
 
+/**
+ * Адаптер [OnBoardAdapter] используется для управления отображением данных в ViewPager
+ * внутри BoardFragment, отображая пользователю информацию на страницах OnBoarding.
+ */
+
 class OnBoardAdapter( private val context: Context) : Adapter<OnBoardAdapter.OnBoardViewHolder>() {
 
+    /**
+     * Адаптер содержит список [list] OnBoardUI, каждый элемент которого содержит заголовок,
+     * описание и изображение. Каждый элемент списка отображается на своей странице ViewPager.
+     * Когда пользователь листает страницы ViewPager, внутренний слушатель OnPageChangeCallback
+     * изменяет видимость кнопок в зависимости от текущей страницы. Кнопка "Next" скрывается
+     * на последней странице, а кнопка "Start" становится видимой только на последней странице.
+     */
     private val list = listOf(
         OnBoardUI(
             context.getString(R.string.on_board_1),

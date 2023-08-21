@@ -11,6 +11,11 @@ import com.example.kitsuapi.R
 import com.example.kitsuapi.databinding.ItemUserBinding
 import com.example.kitsuapi.presentation.models.user.UserUI
 
+/**
+ * Класс [UserAdapter] является адаптером для RecyclerView, который используется
+ * для отображения списка пользователей. Он реализует интерфейс PagingDataAdapter для поддержки
+ * функциональности постраничной загрузки
+ */
 class UserAdapter : PagingDataAdapter<UserUI, UserAdapter.UserViewHolder>(diffUtil) {
     inner class UserViewHolder(private val binding: ItemUserBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -36,6 +41,11 @@ class UserAdapter : PagingDataAdapter<UserUI, UserAdapter.UserViewHolder>(diffUt
         holder.onBind(getItem(position))
     }
 
+    /**
+     * [diffUtil] - это объект, реализующий интерфейс DiffUtil.ItemCallback, который используется
+     * для определения того, что является новым элементом в списке. Он сравнивает элементы по id и
+     * содержанию, чтобы определить, нужно ли обновлять элемент в списке при изменении данных.
+     */
     companion object {
         val diffUtil = object : DiffUtil.ItemCallback<UserUI>() {
             override fun areItemsTheSame(oldItem: UserUI, newItem: UserUI): Boolean {

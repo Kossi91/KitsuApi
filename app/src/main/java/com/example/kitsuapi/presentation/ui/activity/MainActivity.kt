@@ -9,6 +9,11 @@ import com.example.kitsuapi.R
 import com.example.kitsuapi.databinding.ActivityMainBinding
 import org.koin.android.ext.android.inject
 
+/**
+ * [MainActivity] MainActivity
+ * @author Aziz Israilov
+ * @since 1.0v
+ */
 class MainActivity : AppCompatActivity() {
 
     private val tokenPreferenceHelper: TokenPreferenceHelper by inject()
@@ -26,6 +31,11 @@ class MainActivity : AppCompatActivity() {
         setupNavigation()
     }
 
+    /**
+     *[setupNavigation] Устанавливает начальную точку навигации в зависимости от наличия токена доступа.
+     *Если токен доступа отсутствует, значит пользователь не авторизован устанавливает стартовый фрагмент [SignFlowFragment].
+     *Если токен доступа существует, значит пользователь авторизован устанавливает стартовый фрагмент как [MainFlowFragment].
+     */
     private fun setupNavigation() {
 
         val navGraph = navController.navInflater.inflate(R.navigation.nav_graph)

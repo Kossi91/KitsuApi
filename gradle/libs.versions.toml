@@ -38,7 +38,7 @@ viewBindingDelegate = "1.5.8"
 #Kotlin
 kotlin = "1.8.10"
 #agp
-agp = "7.2.2"
+agp = "7.4.2"
 #Dokka
 dokka = "0.9.18"
 #Splashscreen

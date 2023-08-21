@@ -22,6 +22,13 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
+/**
+ * [MangaFragment] наследуется от базового класса [BaseFragment] который содержит общую
+ * логику для фрагментов в приложении и представляет собой фрагмент,
+ * отображающий список манга c возможностью фильтрации по категориям и поиска.
+ * @author Aziz
+ * @since 1.0v
+ */
 class MangaFragment : BaseFragment<FragmentMangaBinding>(R.layout.fragment_manga) {
 
     override val binding by viewBinding(FragmentMangaBinding::bind)
@@ -32,6 +39,9 @@ class MangaFragment : BaseFragment<FragmentMangaBinding>(R.layout.fragment_manga
         CategoriesAdapter(categoriesList)
     }
 
+    /**
+     * [initialize] используется для инициализации элементов пользовательского интерфейса.
+     */
     override fun initialize() {
         setupRecycler()
 
@@ -40,12 +50,21 @@ class MangaFragment : BaseFragment<FragmentMangaBinding>(R.layout.fragment_manga
         }
     }
 
+    /**
+     * [setupListener] используется чтобы установить слушатели для каких-либо View или
+     * других элементов пользовательского интерфейса.
+     */
     override fun setupListener() {
         binding.btnFilter.setOnClickListener {
             showBottomSheet()
         }
     }
 
+    /**
+     * [setupObservers] наблюдателет за данными,
+     * получаемыми из ViewModel.
+     * разворачивая их из [com.example.kitsuapi.presentation.ui.UIState]
+     */
     override fun setupObserves() {
         subscribeToManga()
         subscribeToCategories()
@@ -53,7 +72,10 @@ class MangaFragment : BaseFragment<FragmentMangaBinding>(R.layout.fragment_manga
             viewModel.search(it.toString())
         }
     }
-
+    /**
+     * [subscribeToManga] подписывается на flow и обновляет
+     * [MangaAdapter] при получении новых данных.
+     */
     private fun subscribeToManga() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.mangaFlow.collectLatest { pagingData ->
@@ -62,6 +84,10 @@ class MangaFragment : BaseFragment<FragmentMangaBinding>(R.layout.fragment_manga
         }
     }
 
+    /**
+     * [subscribeToCategories] подписывается на Flow,
+     * разворачивая его из [com.example.kitsuapi.presentation.ui.UIState]
+     */
     private fun subscribeToCategories() {
         viewModel.getCategoriesState.spectateUiState(
             success = { data -> categoriesAdapter.submitData(data) },
@@ -69,12 +95,23 @@ class MangaFragment : BaseFragment<FragmentMangaBinding>(R.layout.fragment_manga
 
         )
     }
-
+    /**
+     * [setupRecycler] настраивает RecyclerView с помощью LayoutManager и адаптера.
+     */
     private fun setupRecycler() {
         binding.recyclerView.apply {
             adapter = mangaAdapter.withLoadStateFooter(DefaultLoadStateAdapter())
         }
     }
+
+    /**
+     * [showBottomSheet] используется для отображения BottomSheet для фильтрации списка
+     * манга по категориям. Здесь мы создаем экземпляр BsFilterBinding для настройки
+     * макета BottomSheet. Затем мы настраиваем RecyclerView для отображения списка категорий
+     * и устанавливаем слушатели для кнопок "Применить" и "Сбросить". После этого мы
+     * устанавливаем макет BsFilterBinding в качестве содержимого BottomSheet и отображаем его.
+     * Автоматически при создании viewmodel происходит запрос на категории и хранятся в [categoriesList]
+     */
     private fun showBottomSheet() {
         val filerBinding = ItemFilterBinding.inflate(layoutInflater)
         val bottomSheet = BottomSheetDialog(requireContext(), R.style.BottomSheetDialog)

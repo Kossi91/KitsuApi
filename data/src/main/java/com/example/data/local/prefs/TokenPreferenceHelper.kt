@@ -1,6 +1,12 @@
 package com.example.data.local.prefs
 
 import android.content.Context
+
+/**
+ * [TokenPreferenceHelper] Класс TokenManager управляет токенами доступа и обновления пользователей.
+ * Он имеет два свойства, accessToken и refreshToken, которые получают и сохраняют
+ * значения токенов в SharedPreferences
+ */
 class TokenPreferenceHelper(context: Context) {
 
     private var prefs = context.getSharedPreferences(PREF_IS_AUTHORIZED, Context.MODE_PRIVATE)

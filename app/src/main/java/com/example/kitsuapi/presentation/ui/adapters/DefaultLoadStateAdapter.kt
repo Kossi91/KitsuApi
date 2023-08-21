@@ -7,7 +7,10 @@ import androidx.paging.LoadState
 import androidx.paging.LoadStateAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kitsuapi.databinding.ItemLoadingBinding
-
+/**
+ * [DefaultLoadStateAdapter] DefaultLoadStateAdapter используется для отображения
+ * состояния загрузки в RecyclerView.
+ */
 class DefaultLoadStateAdapter(
 ) : LoadStateAdapter<DefaultLoadStateAdapter.DefaultLoadStateHolder>() {
 

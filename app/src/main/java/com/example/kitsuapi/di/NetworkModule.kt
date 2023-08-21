@@ -23,6 +23,9 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.create
 import java.util.concurrent.TimeUnit
 
+/**
+ * [networkModule] networkModule
+ */
 val networkModule = module {
     factory { TokenInterceptor(get<TokenPreferenceHelper>()) }
     factory<HttpLoggingInterceptor> {
@@ -38,6 +41,10 @@ val networkModule = module {
     factory { provideCategoriesApiService(get<Retrofit>()) }
 
 
+    /**
+     * [PostApiService] создается с [AuthInterceptor] так как для того чтобы опубликовать пост
+     * требуется токен, в остальных запросах токен не требуется
+     */
     single<PostApiService> {
         Retrofit.Builder()
             .baseUrl("https://kitsu.io/api/")

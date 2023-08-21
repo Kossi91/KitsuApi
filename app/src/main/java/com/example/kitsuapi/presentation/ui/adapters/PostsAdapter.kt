@@ -9,7 +9,17 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.kitsuapi.databinding.ItemPostsBinding
 import com.example.kitsuapi.presentation.models.post.DataItemUI
-
+/**
+ * Класс [PostsAdapter] является адаптером для пагинации списка постов, который
+ * используется в приложении. Адаптер обеспечивает связывание данных с представлением,
+ * позволяет отображать содержимое постов и реагировать на события клика на элемент списка.
+ * Конструктор адаптера принимает функцию обратного вызова onItemCLick, которая будет
+ * вызываться при клике на элемент списка. В качестве параметра передается
+ * идентификатор выбранного поста.
+ * Адаптер наследуется от PagingDataAdapter, который предоставляет функциональность
+ * пагинации списка. В качестве параметров типа передается тип данных, которые будут
+ * отображаться в списке, и тип ViewHolder'а.
+ */
 class PostsAdapter(
     private val onItemCLick: (id: String) -> Unit,
 ) : PagingDataAdapter<DataItemUI, PostsAdapter.PostViewHolder>(diffCallBack) {
@@ -67,6 +77,11 @@ class PostsAdapter(
         }
     }
 
+    /**
+     * [diffCallBack] - это объект, реализующий интерфейс DiffUtil.ItemCallback, который используется
+     * для определения того, что является новым элементом в списке. Он сравнивает элементы по id и
+     * содержанию, чтобы определить, нужно ли обновлять элемент в списке при изменении данных.
+     */
     companion object {
         val diffCallBack = object : DiffUtil.ItemCallback<DataItemUI>() {
             override fun areItemsTheSame(oldItem: DataItemUI, newItem: DataItemUI): Boolean {

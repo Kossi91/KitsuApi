@@ -12,12 +12,22 @@ import com.example.kitsuapi.presentation.extensions.showText
 import com.example.kitsuapi.presentation.models.user.UserUI
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
+/**
+ * [CreatePostFragment] наследуется от [BaseFragment] и содержит реализацию функционала
+ * создания поста. Он также содержит приватную переменную user, которая используется для
+ * получения информации о пользователе, создающем пост.
+ * @author Aziz
+ * @since 1.0v
+ */
 class CreatePostFragment : BaseFragment<FragmentCreatePostBinding>(R.layout.fragment_create_post) {
 
     override val binding by viewBinding(FragmentCreatePostBinding::bind)
     private val viewModel by viewModel<CreatePostViewModel>()
     private var user: UserUI? = null
 
+    /**
+     * Метод [setupListeners] используется для настройки обработчиков событий пользовательского ввода.
+     */
     override fun setupListener() {
         binding.tvPost.setOnClickListener {
             createPost()
@@ -26,13 +36,22 @@ class CreatePostFragment : BaseFragment<FragmentCreatePostBinding>(R.layout.frag
             findNavController().navigateUp()
         }
     }
-
+    /**
+     * [setupObserves] Тут опять из за бэка приходится писать фигню (⊙_⊙),
+     * идет запрос на текущего пользователя по никнейму,
+     * [subscribeToUser] в ответе получаем список пользователей с похожими никнеймами
+     */
     override fun setupObserves() {
         viewModel.getUser("Kossi")
         subscribeToCreatePostState()
         subscribeToUser()
     }
-
+    /**
+     * Метод [subscribeToUser] используется для подписки на изменения состояний при получении
+     * информации о пользователе. Если получение происходит успешно, то происходит заполнение
+     * полей фрагмента информацией о пользователе. Если получение происходит неудачно,
+     * то выводится сообщение об ошибке.
+     */
     private fun subscribeToUser() {
         viewModel.userFlow.spectateUiState(
             loading = { binding.progressBar.visibility = View.VISIBLE },
@@ -54,6 +73,11 @@ class CreatePostFragment : BaseFragment<FragmentCreatePostBinding>(R.layout.frag
         )
     }
 
+    /**
+     * Метод [subscribeToCreatePostState] используется для подписки на изменения состояний при
+     * создании поста. Если создание поста происходит успешно, то происходит перенаправление на
+     * предыдущий экран. Если создание поста происходит неудачно, то выводится сообщение об ошибке.
+     */
     private fun subscribeToCreatePostState() {
         viewModel.fetchCreatePostState.spectateUiState(
             loading = {
@@ -72,6 +96,16 @@ class CreatePostFragment : BaseFragment<FragmentCreatePostBinding>(R.layout.frag
         )
     }
 
+    /**
+    [createPost] Функция для создания нового поста.
+    Если ID пользователя равен null то выводится сообщение об ошибке.
+    Если поле ввода контента пустое или равно null, выводится сообщение об ошибке.
+    Иначе вызывается метод createPost у экземпляра ViewModel с передачей параметров:
+    userId - ID пользователя,
+    content - контент поста,
+    nsfw - флаг, указывающий на то, является ли пост NSFW,
+    spoiler - флаг, указывающий на то, содержит ли пост спойлеры.
+     */
     private fun createPost() {
         if (user?.id == null) {
             showText(getString(R.string.unknown_error))

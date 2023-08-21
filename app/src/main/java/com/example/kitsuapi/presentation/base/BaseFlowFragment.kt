@@ -8,10 +8,22 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 
+/**
+ * [BaseFlowFragment] Абстрактный класс BaseFlowFragment представляет базовый класс flow фрагмента,
+ * содержащего NavHostFragment для управления навигацией между фрагментами. Он определяет общую
+ * логику настройки NavHostFragment и вызывает функцию setupNavigation, которая может быть
+ * переопределена в дочерних классах для настройки конкретной навигации.
+ */
 abstract class BaseFlowFragment(
     @LayoutRes layoutId: Int,
     @IdRes private val navHostFragmentId: Int
 ) : Fragment(layoutId) {
+
+    /**
+     * [onViewCreated] - В этой функции
+     * определяется NavHostFragment и связанный с ним NavController, который передается в
+     * функцию setupNavigation.
+     */
 
     final override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -22,6 +34,10 @@ abstract class BaseFlowFragment(
 
         setupNavigation(navController)
     }
+    /**
+     * [setupNavigation] - открытая функция, которая вызывается из onViewCreated
+     * и может быть переопределена в дочерних классах для настройки конкретной навигации
+     */
     protected open fun setupNavigation(navController: NavController) {
     }
 }
