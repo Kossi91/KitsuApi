@@ -8,10 +8,7 @@ import com.example.data.network.remote.pagingsource.AnimePagingSource
 import com.example.domain.models.anime.Anime
 import com.example.domain.repostories.AnimeRepository
 import kotlinx.coroutines.flow.Flow
-import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
 class AnimeRepositoryImpl
     (private val apiService: AnimeApiService) :
     AnimeRepository {

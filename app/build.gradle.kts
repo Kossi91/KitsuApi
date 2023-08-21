@@ -1,24 +1,18 @@
 plugins {
-    // application
-    id("com.android.application")
-    // kotlin-android
-    id("kotlin-android")
-    // sage args
-//    id("androidx.navigation.safeargs.kotlin")
-//     hilt android
-    id("dagger.hilt.android.plugin")
-    //kapt
-    id("kotlin-kapt")
+    id(libs.plugins.agp.application.get().pluginId)
+    id(libs.plugins.kotlin.kotlin.get().pluginId)
+    id(libs.plugins.kotlin.kapt.get().pluginId)
 }
+
 
 android {
     namespace = "com.example.kitsuapi"
-    compileSdk = 33
+    compileSdk = config.versions.compileSdk.get().toInt()
 
     defaultConfig {
         applicationId = "com.example.kitsuapi"
-        minSdk = 24
-        targetSdk = 33
+        minSdk = config.versions.minSdk.get().toInt()
+        targetSdk = config.versions.targetSdk.get().toInt()
         versionCode = 1
         versionName = "1.0"
 
@@ -35,100 +29,48 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
     kotlinOptions {
-        jvmTarget = "17"
+        jvmTarget = "1.8"
     }
-    // View Binding
     buildFeatures.viewBinding = true
 }
 
 dependencies {
-
-
+    // Implementation project
     implementation(project(":domain"))
     implementation(project(":data"))
+    //UIComponents
+    implementation(libs.bundles.uiComponents)
+    testImplementation(libs.uiComponents.junit)
+    androidTestImplementation(libs.uiComponents.androidTestJunit)
+    androidTestImplementation(libs.uiComponents.androidTestEspresso)
 
-    implementation("androidx.core:core-ktx:1.10.1")
-    implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-
-    implementation("androidx.legacy:legacy-support-v4:1.0.0")
-
-    // glide
-    implementation("com.github.bumptech.glide:glide:4.15.0")
-    // Hilt
-    implementation("com.google.dagger:hilt-android:2.46.1")
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.1")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")
-    kapt("com.google.dagger:hilt-android-compiler:2.46.1")
-
-    // hilt navigation
-    implementation("androidx.hilt:hilt-navigation-fragment:1.0.0")
-    // Kotlin
-    implementation("androidx.activity:activity-ktx:1.7.2")
-
-    val fragmentVersion = "1.3.6"
-    implementation("androidx.fragment:fragment-ktx:1.6.1")
-
-    // Navigation
-    val navVersion = "2.6.0"
-    //   implementation
-    implementation("androidx.navigation:navigation-fragment-ktx:$navVersion")
-    implementation("androidx.navigation:navigation-ui-ktx:$navVersion")
-    implementation("androidx.navigation:navigation-dynamic-features-fragment:$navVersion")
-
-    //Room
-    val roomVersion = "2.5.2"
-    implementation("androidx.room:room-ktx:$roomVersion")
-    // To use Kotlin annotation processing tool (kapt)
-    kapt("androidx.room:room-compiler:$roomVersion")
-
-    // Paging 3
-    val pagingVersion = "3.2.0"
-    //noinspection GradleDependency
-    implementation("androidx.paging:paging-runtime-ktx:$pagingVersion")
-
-    // ViewBinding Property Delegate
-    val viewBindingPropertyDelegate = "1.5.8"
-    // To use only without reflection variants of viewBinding
-    implementation("com.github.kirich1409:viewbindingpropertydelegate-noreflection:$viewBindingPropertyDelegate")
-
-    val version = "2.6.1"
-    // | for Lifecycles only (without ViewModel or LiveData)
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:$version")
-
-    // coordinatorLayout
-    implementation("androidx.coordinatorlayout:coordinatorlayout:1.2.0")
-
-    // Material Design Components
-    implementation("com.google.android.material:material:1.9.0")
-
-    // lifecycle runtime
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
-
-    // CircleImageView
-    implementation("de.hdodenhof:circleimageview:3.1.0")
-
-    // SplashScreen
-    implementation("androidx.core:core-splashscreen:1.0.1")
-
-    // Dots Indicator
-    implementation("com.tbuonomo:dotsindicator:5.0")
-
-    // Koin for Android
-    implementation ("io.insert-koin:koin-android:3.4.0")
-
-
-    //Retrofit 2
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    //Gson
-    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
-
-    // OkHttp
-    implementation("com.squareup.okhttp3:okhttp-bom:5.0.0-alpha.6")
-    implementation("com.squareup.okhttp3:okhttp")
-    implementation("com.squareup.okhttp3:logging-interceptor")
+    // Navigation component
+    implementation(libs.bundles.navigationComponent)
+    // Room
+    implementation(libs.bundles.room)
+    kapt(libs.room.roomCompiler)
+    // Lifecycle
+    implementation(libs.bundles.lifecycle)
+    // Coroutines
+    implementation(libs.bundles.coroutines)
+    // Koin
+    implementation(libs.bundles.koin)
+    testImplementation(libs.koin.koinTest)
+    // Paging
+    implementation(libs.paging.pagingRuntime)
+    // Glide
+    implementation(libs.glide.glide)
+    kapt(libs.glide.glideCompiler)
+    // ViewBindingDelegate
+    implementation(libs.viewBindingDelegate.viewBinding)
+    // Retrofit
+    implementation(libs.bundles.retrofit)
+    // okHttp
+    implementation(libs.bundles.okHttp)
+    // Coil
+    implementation(libs.coil.coil)
 }

@@ -8,10 +8,7 @@ import com.example.data.network.remote.pagingsource.MangaPagingSource
 import com.example.domain.models.manga.Manga
 import com.example.domain.repostories.MangaRepository
 import kotlinx.coroutines.flow.Flow
-import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
 class MangaRepositoryImpl (private val apiService: MangaApiService): MangaRepository {
 
     override fun fetchManga(text: String?, categories: List<String>?): Flow<PagingData<Manga>> {

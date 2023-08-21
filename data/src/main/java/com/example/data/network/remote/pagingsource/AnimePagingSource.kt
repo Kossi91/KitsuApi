@@ -5,9 +5,8 @@ import androidx.paging.PagingState
 import com.example.data.network.remote.apiservices.AnimeApiService
 import com.example.data.network.remote.dtos.anime.toDomain
 import com.example.domain.models.anime.Anime
-import javax.inject.Inject
 
-class AnimePagingSource @Inject constructor(
+class AnimePagingSource (
 private val apiService: AnimeApiService,
 private val text: String?,
 private val categories: List<String>?,

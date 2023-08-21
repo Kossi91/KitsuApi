@@ -1,10 +1,17 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
+val config = the<org.gradle.accessors.dm.LibrariesForConfig>()
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 plugins {
-    id("com.android.application") version "8.1.0" apply false
-    id("org.jetbrains.kotlin.android") version "1.8.0" apply false
-    id("com.android.library") version "8.1.0" apply false
-    id("org.jetbrains.kotlin.jvm") version "1.8.0" apply false
-    id("com.google.dagger.hilt.android") version "2.44" apply false
+    alias(libs.plugins.agp.application) apply false
+    alias(libs.plugins.agp.library) apply false
+    alias(libs.plugins.jetBrains.kotlin.gradle) apply false
+    alias(libs.plugins.jetBrains.kotlin.jvm) apply false
+    alias(libs.plugins.jetBrains.dokka)
+}
+buildscript {
+    dependencies {
+        classpath(libs.jetBrains.dokka.gradle)
+        classpath(libs.jetBrains.dokka.android.documentation)
+        classpath(libs.jetBrains.dokka.android.gradle)
+    }
 }

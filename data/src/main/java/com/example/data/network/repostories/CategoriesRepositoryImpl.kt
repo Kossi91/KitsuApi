@@ -7,7 +7,6 @@ import com.example.domain.either.Either
 import com.example.domain.models.categories.DataItemCt
 import com.example.domain.repostories.CategoriesRepository
 import kotlinx.coroutines.flow.Flow
-import javax.inject.Inject
 
 class CategoriesRepositoryImpl(
     private val apiService: CategoriesApiService

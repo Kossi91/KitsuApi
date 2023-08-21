@@ -5,9 +5,8 @@ import androidx.paging.PagingState
 import com.example.data.network.remote.apiservices.MangaApiService
 import com.example.data.network.remote.dtos.manga.toDomain
 import com.example.domain.models.manga.Manga
-import javax.inject.Inject
 
-class MangaPagingSource @Inject constructor(
+class MangaPagingSource (
     private val apiService: MangaApiService,
     private val text: String?,
     private val categories: List<String>?
